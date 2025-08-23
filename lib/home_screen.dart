@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/widget/freelancer_info_widget.dart';
+import 'package:flutter_application_2/widget/section_widget.dart';
+import 'package:flutter_application_2/widget/top_rated_list_item.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -9,7 +12,7 @@ class HomeScreen extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        leading: Icon(Icons.menu),
+
         title: Image.asset('assets/images/logo.png'),
         actions: [
           buildNotificationActionItem(),
@@ -18,20 +21,41 @@ class HomeScreen extends StatelessWidget {
           SizedBox(width: 15),
         ],
       ),
-      body: Center(
-        child: Column(
-          children: [
-            SizedBox(height: 18),
-            buildSearchbar(),
-            SizedBox(height: 18),
-            Image.asset('assets/images/slider.png', fit: BoxFit.cover),
-            SizedBox(height: 16),
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            children: [
+              SizedBox(height: 18),
+              buildSearchbar(),
+              SizedBox(height: 18),
+              Image.asset(
+                'assets/images/slider.png',
+                fit: BoxFit.cover,
+                width: double.infinity,
+              ),
+              SizedBox(height: 16),
 
-            buildSectionsHeader(title: 'Top Rated FreeLancers'),
-            SizedBox(height: 11),
-            buildTopRatedList(),
-            buildSectionsHeader(title: 'Top Services'),
-          ],
+              SectionsHeaderWidget(title: 'Top Rated FreeLancers'),
+              SizedBox(height: 11),
+              buildTopRatedList(),
+              SectionsHeaderWidget(title: 'Top Services'),
+              Padding(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  children: [
+                    FreelancerInfo(image: 'assets/images/slider.png'),
+                    SizedBox(height: 10),
+                    FreelancerInfo(image: 'assets/images/slider.png'),
+                    SizedBox(height: 10),
+                    FreelancerInfo(image: 'assets/images/slider.png'),
+                    SizedBox(height: 10),
+                    FreelancerInfo(image: 'assets/images/slider.png'),
+                    SizedBox(height: 10),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -72,115 +96,16 @@ class HomeScreen extends StatelessWidget {
           itemCount: 5,
           itemBuilder: (context, index) {
             final imageNumber = index + 2;
-            return buildTopRatedListItem(imageNumber);
+            return TopRatedListItem(
+              rate: 4.9,
+              image: 'assets/images/$imageNumber.png',
+              name: 'Wade Warren',
+              major: 'Engineer',
+            );
           },
           separatorBuilder: (context, index) => SizedBox(width: 5),
         ),
       ),
-    );
-  }
-
-  SizedBox buildTopRatedListItem(int imageNumber) {
-    return SizedBox(
-      width: 100,
-      child: Stack(
-        alignment: Alignment.topCenter,
-        children: [
-          Container(
-            width: 72,
-            height: 72,
-            decoration: BoxDecoration(shape: BoxShape.circle),
-            child: Image.asset('assets/images/$imageNumber.png'),
-          ),
-          Positioned(
-            top: 62,
-            child: Container(
-              padding: EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(8),
-                boxShadow: [
-                  BoxShadow(
-                    color: Color(0xFFE7EFFC),
-                    offset: Offset(2, 2),
-                    blurRadius: 16,
-                    spreadRadius: 0,
-                  ),
-                ],
-              ),
-              child: Column(
-                children: [
-                  Text(
-                    'Wade Warren',
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.normal,
-                      color: Color(0xB31D1F24),
-                    ),
-                  ),
-                  Text(
-                    'Beautician',
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                      color: Color(0xFF1D1F24),
-                    ),
-                  ),
-                  SizedBox(height: 4),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Color(0x14827BEB),
-                      borderRadius: BorderRadius.circular(40),
-                    ),
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                    child: Row(
-                      children: [
-                        Image.asset('assets/images/star.png'),
-                        SizedBox(width: 4),
-                        Text(
-                          '4.9',
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Row buildSectionsHeader({required String title}) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Container(
-          padding: EdgeInsets.only(left: 16),
-          height: 38,
-          alignment: Alignment.centerLeft,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(colors: [Color(0xFFC2D7F2), Colors.white]),
-          ),
-          child: Text(
-            title,
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-          ),
-        ),
-        TextButton(
-          style: TextButton.styleFrom(padding: EdgeInsets.only(right: 16)),
-          onPressed: () {},
-          child: Text(
-            'view all',
-            style: TextStyle(decoration: TextDecoration.underline),
-          ),
-        ),
-      ],
     );
   }
 
