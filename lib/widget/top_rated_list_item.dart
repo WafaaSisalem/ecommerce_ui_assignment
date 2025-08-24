@@ -1,30 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/models/freelancer_model.dart';
 import 'package:flutter_application_2/widget/rating_widget.dart';
 
 class TopRatedListItem extends StatelessWidget {
-  const TopRatedListItem({
-    super.key,
-    required this.image,
-    required this.name,
-    required this.major,
-    required this.rate,
-  });
-  final String image;
-  final String name;
-  final String major;
-  final double rate;
+  const TopRatedListItem({super.key, required this.freelancer});
+  final Freelancer freelancer;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: 100,
       child: Stack(
+        clipBehavior: Clip.none,
         alignment: Alignment.topCenter,
         children: [
           Container(
             width: 72,
             height: 72,
             decoration: BoxDecoration(shape: BoxShape.circle),
-            child: Image.asset(image),
+            child: Image.asset(freelancer.image),
           ),
           Positioned(
             top: 62,
@@ -45,7 +38,7 @@ class TopRatedListItem extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    name,
+                    freelancer.name,
                     style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.normal,
@@ -53,7 +46,7 @@ class TopRatedListItem extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    major,
+                    freelancer.major,
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
@@ -61,7 +54,7 @@ class TopRatedListItem extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 4),
-                  RatingWidget(rate: rate),
+                  RatingWidget(rate: freelancer.rate),
                 ],
               ),
             ),

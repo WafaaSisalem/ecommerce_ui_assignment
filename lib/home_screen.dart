@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/models/freelancer_model.dart';
+import 'package:flutter_application_2/models/service_model.dart';
 import 'package:flutter_application_2/widget/freelancer_info_widget.dart';
 import 'package:flutter_application_2/widget/section_widget.dart';
 import 'package:flutter_application_2/widget/top_rated_list_item.dart';
@@ -42,15 +44,55 @@ class HomeScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(16),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    FreelancerInfo(image: 'assets/images/slider.png'),
-                    SizedBox(height: 10),
-                    FreelancerInfo(image: 'assets/images/slider.png'),
-                    SizedBox(height: 10),
-                    FreelancerInfo(image: 'assets/images/slider.png'),
-                    SizedBox(height: 10),
-                    FreelancerInfo(image: 'assets/images/slider.png'),
-                    SizedBox(height: 10),
+                    FreelancerInfo(
+                      freelancer: Freelancer(
+                        services: [
+                          ServiceModel(
+                            image: 'assets/images/service1.png',
+                            details:
+                                'Doloribus saepe aut necessit qui non qui.',
+                          ),
+                        ],
+                        image: 'assets/images/1.png',
+                        name: 'Miss Azchary Williams',
+                        major: 'Beautician',
+                        rate: 4.9,
+                      ),
+                    ),
+                    SizedBox(height: 26),
+                    FreelancerInfo(
+                      freelancer: Freelancer(
+                        image: 'assets/images/1.png',
+                        name: 'Miss Azchary Williams',
+                        major: 'Beautician',
+                        rate: 4.9,
+                        services: [
+                          ServiceModel(
+                            image: 'assets/images/service2.png',
+                            details:
+                                'Doloribus saepe aut necessit qui non qui.',
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 26),
+                    FreelancerInfo(
+                      freelancer: Freelancer(
+                        services: [
+                          ServiceModel(
+                            image: 'assets/images/service3.png',
+                            details:
+                                'Doloribus saepe aut necessit qui non qui.',
+                          ),
+                        ],
+                        image: 'assets/images/1.png',
+                        name: 'Miss Azchary Williams',
+                        major: 'Beautician',
+                        rate: 4.9,
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -97,13 +139,21 @@ class HomeScreen extends StatelessWidget {
           itemBuilder: (context, index) {
             final imageNumber = index + 2;
             return TopRatedListItem(
-              rate: 4.9,
-              image: 'assets/images/$imageNumber.png',
-              name: 'Wade Warren',
-              major: 'Engineer',
+              freelancer: Freelancer(
+                services: [
+                  ServiceModel(
+                    image: 'assets/images/service1.png',
+                    details: 'Doloribus saepe aut necessit qui non qui.',
+                  ),
+                ],
+                image: 'assets/images/$imageNumber.png',
+                name: 'John Doe',
+                major: 'Web Developer',
+                rate: 4.5,
+              ),
             );
           },
-          separatorBuilder: (context, index) => SizedBox(width: 5),
+          separatorBuilder: (context, index) => SizedBox(width: 25),
         ),
       ),
     );

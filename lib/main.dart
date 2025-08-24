@@ -8,7 +8,7 @@ void main() {
   runApp(
     MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginScreen(),
+      home: HomeScreen(),
       routes: {
         Routes.login: (context) => LoginScreen(),
         Routes.signup: (context) => SignUp(),
